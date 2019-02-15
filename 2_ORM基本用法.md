@@ -181,3 +181,10 @@ def updata_data():
     person.name = 'ketang'
     session.commit()
 ```
+### 删
+```
+def delete_data():
+    person = session.query(Person).first()
+    session.delete(person)
+    session.commit()
+```
