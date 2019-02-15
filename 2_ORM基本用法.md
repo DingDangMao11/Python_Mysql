@@ -148,8 +148,16 @@ def search_data():
         print(p)
 ```
 #### 2.根据条件查找数据
+##### (1)
 ```
     all_person = session.query(Person).filter_by(name='zhiliao1').all()
+    for x in all_person:
+        print(x)
+        
+```
+##### (2)
+```
+all_person = session.query(Person).filter(Person.name=='zhiliao').all()
     for x in all_person:
         print(x)
 ```
