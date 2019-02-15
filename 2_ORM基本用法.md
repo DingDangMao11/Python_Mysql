@@ -174,3 +174,10 @@ print(person)
 person = session.query(Person).first()
 print(person)
 ```
+### 改
+```
+def updata_data():
+    person = session.query(Person).first()
+    person.name = 'ketang'
+    session.commit()
+```
