@@ -161,3 +161,16 @@ all_person = session.query(Person).filter(Person.name=='zhiliao').all()
     for x in all_person:
         print(x)
 ```
+#### 3.根据id查好数据
+```
+使用get方法查找数据，get方法根据id查找数据，只会返回一条数据或者NONE
+```
+```
+person = session.query(Person).get(1)
+print(person)
+```
+#### 4.使用first方法获取结果集中的第一条数据
+```
+person = session.query(Person).first()
+print(person)
+```
