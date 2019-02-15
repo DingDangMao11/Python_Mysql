@@ -4,6 +4,7 @@
 # 2.对象模型与数据库表的映射
 # 3.要使用ORM来操作数据库，首先需要创建一个类来与对应的表进行映射。
 ```
+### 1.创建一个person表：
 ```
 将数据对象模板映射到数据库中案例：
 #encoding: utf-8
@@ -56,4 +57,69 @@ mysql> desc person;
 | age     | int(11)     | YES  |     | NULL    |                |
 | country | varchar(50) | YES  |     | NULL    |                |
 +---------+-------------+------+-----+---------+----------------+
+```
+### 2.对person表进行增删改查：
+```
+#encoding: utf-8
+
+from sqlalchemy import create_engine,Column,Integer,String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+HOSTNAME = '127.0.0.1'
+PORT     = '3306'
+# DATABASE:表示要连接的数据库名称，首先要创建一个数据库
+DATABASE = 'first_sqlalchemy'
+USERNAME = 'root'
+PASSWORD = '0000'
+
+DB_URI = "mysql+pymysql://{username}:{password}@{host}:{port}/{db}?charset=utf8".format\
+    (username=USERNAME,password=PASSWORD,host=HOSTNAME,port=PORT,db=DATABASE)
+# 创建数据库引擎
+engine = create_engine(DB_URI)
+# 所有的类都要继承自`declarative_base`这个函数生成的基类
+Base = declarative_base(engine)
+# 1.点击sessionmaker():ctrl+b可看到点击sessionmaker函数的源代码
+# 2.session是一个类，sessionmaker是session是一个类类中的方法
+# 3.sessionmaker(engine)表示创建了一个对象
+# Session = sessionmaker(engine)
+# 拿到Session这个对象在调用一下Session()
+# session = Session()
+# 简化为：
+session = sessionmaker(engine)()
+
+class Person(Base):
+     # 定义表名为person
+     __tablename__ = 'person'
+     # 将id设置为主键，并且默认是自增长的
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     # name字段，字符类型，最大的长度是50个字符
+     name = Column(String(50))
+     age = Column(Integer)
+     country = Column(String(50))
+# session 会话
+# 增
+def add_data():
+    p = Person(name='zhiliao',age=18,country='china')
+    # 1.首先将数据添加到session中
+    # 2.再将数据提交给数据库
+    session.add(p)
+    session.commit()
+# 查
+def search_data():
+    pass
+# 改
+def updata_data():
+    pass
+# 删
+def delete_data():
+    pass
+if __name__ == '__main__':
+    add_data()
+# add_data()方法的运行结果：
+mysql> select * from person;
++----+---------+------+---------+
+| id | name    | age  | country |
++----+---------+------+---------+
+|  1 | zhiliao |   18 | china   |
++----+---------+------+---------+
 ```
