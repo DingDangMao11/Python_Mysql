@@ -96,6 +96,8 @@ class Person(Base):
      name = Column(String(50))
      age = Column(Integer)
      country = Column(String(50))
+     def __str__(self):
+         return "<Person(name:%s,age:%s,country:%s)>" % (self.name,self.age,self.country)
 # session 会话
 # 增
 def add_data():
@@ -122,4 +124,32 @@ mysql> select * from person;
 +----+---------+------+---------+
 |  1 | zhiliao |   18 | china   |
 +----+---------+------+---------+
+```
+### 增的方法
+#### 1.添加单条数据
+```
+p = Person(name='zhiliao',age=18,country='china')
+session.add(p)
+session.commit()
+```
+#### 2.添加多条数据
+```
+p1 = Person(name='zhiliao1',age=19,country='china')
+p2 = Person(name='zhiliao2', age=20, country='china')
+session.add_all([p1,p2])
+session.commit()
+```
+### 查的方法
+####  1.查找表中的所有数据
+```
+def search_data():
+    all_person  = session.query(Person).all()
+    for p in all_person:
+        print(p)
+```
+#### 2.根据条件查找数据
+```
+    all_person = session.query(Person).filter_by(name='zhiliao1').all()
+    for x in all_person:
+        print(x)
 ```
