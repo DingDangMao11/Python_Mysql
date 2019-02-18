@@ -192,3 +192,18 @@ article = Article(title='adb')
 school = Column(Text)
 article = Article(school='adb')
 ```
+### 9.LONGTEXT
+```
+from sqlalchemy.dialects.mysql import LONGTEXT
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     content = Column(LONGTEXT)
+article = Article(content='111')
++---------+----------+------+-----+---------+----------------+
+| Field   | Type     | Null | Key | Default | Extra          |
++---------+----------+------+-----+---------+----------------+
+| id      | int(11)  | NO   | PRI | NULL    | auto_increment |
+| content | longtext | YES  |     | NULL    |                |
++---------+----------+------+-----+---------+----------------+
+```
