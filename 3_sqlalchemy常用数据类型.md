@@ -62,6 +62,10 @@ article = Article(is_delete=True)
 
 #### 3.DECIMAL：定点类型
 ```
+解决精度丢失的的问题
+DECIMAL(x,y):使用时需传递两个参数，第一个参数表示总共存储多少位数字，第二个参数表示小数点后有多少位数字
+```
+```
 # 100000.0001
 # DECIMAL(10,4) :存储10位数字，小数点后为4位
 price = Column(DECIMAL(10,4))
