@@ -32,6 +32,8 @@ article = Article(price=10.294334)
 session.add(article)
 session.commit()
 ```
+
+#### 1.Float
 ```
 #article = Article(price=10.2334)
 +----+--------+
@@ -47,3 +49,29 @@ session.commit()
 |  3 | 10.2943 |
 +----+---------+
 ```
+#### 2.Boolean
+```
+is_delete = Column(Boolean)
+article = Article(is_delete=True)
++----+-----------+
+| id | is_delete |
++----+-----------+
+|  1 |         1 |
++----+-----------+
+```
+
+#### 3.DECIMAL：定点类型
+```
+# 100000.0001
+# DECIMAL(10,4) :存储10位数字，小数点后为4位
+price = Column(DECIMAL(10,4))
+article = Article(price=999999.9999)
++----+-------------+
+| id | price       |
++----+-------------+
+|  1 | 999999.9999 |
++----+-------------+
+```
+
+
+
