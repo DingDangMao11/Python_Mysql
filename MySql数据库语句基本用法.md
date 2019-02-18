@@ -29,3 +29,15 @@
 # | country | varchar(50) | YES  |     | NULL    |                |
 # +---------+-------------+------+-----+---------+----------------+
 ```
+```
+mysql> show create table article\G
+*************************** 1. row ***************************
+       Table: article
+Create Table: CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `telephione` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `telephione` (`telephione`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+1 row in set (0.01 sec)
+```
