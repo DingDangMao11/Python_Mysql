@@ -1,12 +1,12 @@
 ###  Column常用参数：
 ```
 (1)default：默认值
-(2)nullable：是否可空
+(2)nullable：是否可空。默认是True，也就是可以为空
 (3)primary_key:是否为主键
 (4)autoincrement:是否自动增长
 (5)onupdate:更新的时候执行的函数
 (6)name:该属性在数据库中的字段映射
-(7)unique:是否唯一
+(7)unique:指定某个值是否唯一，默认为False
 ```
 ```
 from sqlalchemy import create_engine,Column,Integer,String,Float,Boolean,DECIMAL,Enum,Date,DateTime,Time,Text
@@ -118,6 +118,8 @@ article = Article(telephione='18888888888')
 session.add(article)
 session.commit()
 ```
+### 3.onupdate
+
 
 
 
