@@ -184,3 +184,11 @@ article = Article(create_time=time(hour=11,minute=1,second=11))
 title = Column(String(50))
 article = Article(title='adb')
 ```
+ 8.Text: 文本类型
+ ```
+可存储6万多个字符,如果超过此范围，可以使用LONGTEXT
+```
+```
+school = Column(Text)
+article = Article(school='adb')
+```
