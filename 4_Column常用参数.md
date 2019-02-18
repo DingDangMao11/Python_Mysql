@@ -41,6 +41,7 @@ article.create_time = datetime.now()
 session.add(article)
 session.commit()
 ```
+### 1.default
 #### (1) article.create_time = datetime.now()
 ```
 class Article(Base):
@@ -80,6 +81,21 @@ session.commit()
 +----+---------------------+-----------+
 |  1 | 2019-02-18 19:41:59 |        11 |
 +----+---------------------+-----------+
+```
+### 2.nullable
+```
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     # (1)title = Column(String(50)) 默认nullable值为True。表示title可以为空
+     # (2)title = Column(String(50),nullable=False),表示title不可以为空
+     title = Column(String(50),nullable=False)
+```
+```
+article = Article()
+article.title='abc'
+session.add(article)
+session.commit()
 ```
 
 
