@@ -1,5 +1,8 @@
 ### sqlalchemy常用数据类型
 ```
+from sqlalchemy import create_engine,Column,Integer,String,Float,Boolean,DECIMAL,Enum,Date,DateTime,Time
+```
+```
 #encoding: utf-8
 
 from sqlalchemy import create_engine,Column,Integer,String,Float
@@ -142,8 +145,9 @@ article = Article(time=date(2017,10,10))
 |  1 | 2017-10-10 |
 +----+------------+
 ```
-### # 5.Datetime: 存储时间，可以存储到年月日时分秒毫秒等，映射到数据库中也是datetime类型。
+### # 5.Datetime
 ```
+存储时间，可以存储到年月日时分秒毫秒等，映射到数据库中也是datetime类型。
 在Python代码中，可以使用‘datetime.datetime’
 time = Column(DateTime)
 from datetime import datetime
@@ -171,4 +175,12 @@ article = Article(create_time=time(hour=11,minute=1,second=11))
 +----+-------------+
 |  1 | 11:01:11    |
 +----+-------------+
+```
+### 7.String
+```
+可变字符类型，映射到数据库是varchar类型
+```
+```
+title = Column(String(50))
+article = Article(title='adb')
 ```
