@@ -128,4 +128,47 @@ article = Article(tag=TagEnum.flask)
 session.add(article)
 session.commit()
 ```
-
+### 4.datetime类型
+```
+Date:存储时间，只能存储年月日。映射到数据库中是data类型。在+Python中，可以使用datatime.data来指定。
+```
+```
+time = Column(Date)
+from datetime import date
+article = Article(time=date(2017,10,10))
++----+------------+
+| id | time       |
++----+------------+
+|  1 | 2017-10-10 |
++----+------------+
+```
+### # 5.Datetime: 存储时间，可以存储到年月日时分秒毫秒等，映射到数据库中也是datetime类型。
+```
+在Python代码中，可以使用‘datetime.datetime’
+time = Column(DateTime)
+from datetime import datetime
+article = Article(time=datetime(2011,10,10,11,11,11))
++----+---------------------+
+| id | time                |
++----+---------------------+
+|  1 | 2011-10-10 11:11:11 |
++----+---------------------+
+```
+### 6.Time
+```
+Time: 存储时间，可以存储时分秒，映射到数据库中也是time类型。
+在Python代码中，可以使用‘datetime.time’
+```
+```
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     create_time = Column(Time)
+from datetime import time
+article = Article(create_time=time(hour=11,minute=1,second=11))
++----+-------------+
+| id | create_time |
++----+-------------+
+|  1 | 11:01:11    |
++----+-------------+
+```
