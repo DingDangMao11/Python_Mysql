@@ -76,6 +76,56 @@ article = Article(price=999999.9999)
 |  1 | 999999.9999 |
 +----+-------------+
 ```
+### 3.Enum：枚举类型
+#### (1) from sqlalchemy import create_engine,Column,Integer,String,Float,Boolean,DECIMAL,Enum
+```
+tag = Column(Enum("python","flask","django"))
+article = Article(tag="python")
+```
+#### (2) import enum
+```
+#encoding: utf-8
 
+from sqlalchemy import create_engine,Column,Integer,String,Float,Boolean,DECIMAL
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+# python3中才有
+import enum
+HOSTNAME = '127.0.0.1'
+PORT     = '3306'
+DATABASE = 'first_sqlalchemy'
+USERNAME = 'root'
+PASSWORD = '0000'
 
+DB_URI = "mysql+pymysql://{username}:{password}@{host}:{port}/{db}?charset=utf8".format\
+    (username=USERNAME,password=PASSWORD,host=HOSTNAME,port=PORT,db=DATABASE)
+# 创建数据库引擎
+engine = create_engine(DB_URI)
+Base = declarative_base(engine)
+session = sessionmaker(engine)()
+```
+```
+class TagEnum(enum.Enum):
+    python='python'
+    flask = 'flask'
+    django = 'django'
+```
+```
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     tag = Column(Enum(TagEnum))
+
+# drop_all()将article表中的属性全部删掉
+Base.metadata.drop_all()
+Base.metadata.create_all()
+```
+```
+#article = Article(tag="python")
+article = Article(tag=TagEnum.flask)
+```
+```
+session.add(article)
+session.commit()
+```
 
