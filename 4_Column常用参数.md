@@ -6,6 +6,7 @@
 (4)autoincrement:是否自动增长
 (5)onupdate:更新的时候执行的函数
 (6)name:该属性在数据库中的字段映射
+(7)unique:是否唯一
 ```
 ```
 from sqlalchemy import create_engine,Column,Integer,String,Float,Boolean,DECIMAL,Enum,Date,DateTime,Time,Text
@@ -84,6 +85,10 @@ session.commit()
 ```
 ### 2.nullable
 ```
+(1)  nullable=False,表示title不可以为空
+(2)nullable=True,表示title可以为空
+```
+```
 class Article(Base):
      __tablename__ = 'article'
      id = Column(Integer,primary_key=True,autoincrement=True)
@@ -94,6 +99,22 @@ class Article(Base):
 ```
 article = Article()
 article.title='abc'
+session.add(article)
+session.commit()
+```
+### 3.unique
+```
+unique=True ：数据唯一
+```
+```
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     telephione = Column(String(11),unique=True)
+Base.metadata.drop_all()
+Base.metadata.create_all()
+
+article = Article(telephione='18888888888')
 session.add(article)
 session.commit()
 ```
