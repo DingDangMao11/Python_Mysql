@@ -72,8 +72,32 @@ print(articles)
 ```
 [('title0', 65.0), ('title1', 85.0), ('title2', 55.0), ('title3', 96.0), ('title4', 72.0), ('title5', 92.0)]
 ```
-
-
+#### (4)聚合函数
+```
+func.count：统计行的数量。
+func.avg：求平均值。
+func.max：求最大值。
+func.min：求最小值。
+func.sum：求和。
+```
+```
+result = session.query(func.count(Article.id)).first()
+print(result)
+(6,)
+```
+```
+result = session.query(func.max(Article.price)).first()
+print(result)
+(96.0,)
+```
+```
+result = session.query(func.min(Article.price)).first()
+print(result)
+```
+```
+result = session.query(func.sum(Article.price)).first()
+print(result)
+```
 
 
 
