@@ -119,7 +119,71 @@ session.add(article)
 session.commit()
 ```
 ### 3.onupdate
+```
+在数据更新的时候会调用这个参数指定的值或者函数。在第一次插入这条数据的时候，不会用onupdate的值，只会用default的值。
+常用的就是‘update_time’(每次更新数据的时候都要更新的值)
+```
 
+```
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     title = Column(String(50),nullable=False)
+     update_time = Column(DateTime,onupdate=datetime.now,default=datetime.now)
+# Base.metadata.drop_all()
+# Base.metadata.create_all()
+
+article = session.query(Article).first()
+article.title = '123'
+session.commit()
+```
+### 4.name 
+```
+指定ORM模型中某个属性映射到表中的字段名。如果不指定，那么会使用这个属性的名字来作为字段名。如果指定了，就会使用指定的这个值作为参数。
+title = Column(String(50),name='my_title',nullable=False)
+```
+```
+#encoding: utf-8
+from sqlalchemy import create_engine,Column,Integer,String,Float,Boolean,DECIMAL,Enum,Date,DateTime,Time,Text
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
+# python3中才有
+import enum
+HOSTNAME = '127.0.0.1'
+PORT     = '3306'
+DATABASE = 'first_sqlalchemy'
+USERNAME = 'root'
+PASSWORD = '0000'
+
+DB_URI = "mysql+pymysql://{username}:{password}@{host}:{port}/{db}?charset=utf8".format\
+    (username=USERNAME,password=PASSWORD,host=HOSTNAME,port=PORT,db=DATABASE)
+# 创建数据库引擎
+engine = create_engine(DB_URI)
+Base = declarative_base(engine)
+
+session = sessionmaker(engine)()
+```
+```
+class Article(Base):
+     __tablename__ = 'article'
+     id = Column(Integer,primary_key=True,autoincrement=True)
+     title = Column(String(50),name='my_title',nullable=False)
+     update_time = Column(DateTime,onupdate=datetime.now,default=datetime.now)
+Base.metadata.drop_all()
+Base.metadata.create_all()
+article =Article(title='abc')
+session.add(article)
+session.commit()
+session.commit()
+```
+```
++----+----------+---------------------+
+| id | my_title | update_time         |
++----+----------+---------------------+
+|  1 | abc      | 2019-02-19 10:25:23 |
++----+----------+---------------------+
+```
 
 
 
