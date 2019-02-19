@@ -41,3 +41,10 @@ Create Table: CREATE TABLE `article` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
 1 row in set (0.01 sec)
 ```
+```
+添加一列
+ alter table article add column content text;
+```
+```
+ update article set content='abc' where id=6
+```
