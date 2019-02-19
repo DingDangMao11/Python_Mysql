@@ -41,15 +41,41 @@ class Article(Base):
 # session.commit()
 articles = session.query(Article).all()
 ```
+##### (1)
 ```
 for article in articles:
     print(article)
+```
+```
 <Article(title:title1)>
 <Article(title:title2)>
 <Article(title:title3)>
 <Article(title:title4)>
 <Article(title:title5)>
-```    
+``` 
+##### (2)
+```
 print(articles)
+```
+```
 [<Article(title:title0)>, <Article(title:title1)>, <Article(title:title2)>, <Article(title:title3)>, <Article(title:title4)>, <Article(title:title5)>]
 ```
+### 2.模型中的属性。
+```
+可以指定只查找某个模型的其中几个属性。
+```
+```
+# 模型中的属性
+articles = session.query(Article.title,Article.price).all()
+print(articles)
+```
+```
+[('title0', 65.0), ('title1', 85.0), ('title2', 55.0), ('title3', 96.0), ('title4', 72.0), ('title5', 92.0)]
+```
+
+
+
+
+
+
+
