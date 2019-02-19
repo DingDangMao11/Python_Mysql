@@ -72,7 +72,7 @@ print(articles)
 ```
 [('title0', 65.0), ('title1', 85.0), ('title2', 55.0), ('title3', 96.0), ('title4', 72.0), ('title5', 92.0)]
 ```
-#### (4)聚合函数
+#### (3)聚合函数
 ```
 func.count：统计行的数量。
 func.avg：求平均值。
