@@ -60,7 +60,7 @@ print(articles)
 ```
 [<Article(title:title0)>, <Article(title:title1)>, <Article(title:title2)>, <Article(title:title3)>, <Article(title:title4)>, <Article(title:title5)>]
 ```
-### 2.模型中的属性。
+#### (2).模型中的属性。
 ```
 可以指定只查找某个模型的其中几个属性。
 ```
